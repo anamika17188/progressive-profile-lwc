@@ -1,0 +1,69 @@
+<template>
+    <lightning-card title="Complete Your Profile">
+
+        <!-- Tab buttons -->
+        <div class="slds-p-horizontal_medium slds-p-top_medium">
+            <template for:each={tabs} for:item="tab"
+                for:index="index">
+                <lightning-button
+                    key={tab.label}
+                    label={tab.label}
+                    variant={tab.variant}
+                    data-index={index}
+                    onclick={goToTab}
+                    class="slds-m-right_x-small">
+                </lightning-button>
+            </template>
+        </div>
+
+        <!-- Step counter -->
+        <div class="slds-p-horizontal_medium slds-p-top_small">
+            <p style="font-size:13px; color:#0070d2; 
+                font-weight:500;">
+                Step {currentStepNumber} of {totalSteps}
+            </p>
+        </div>
+
+        <!-- Fields -->
+        <div class="slds-p-around_medium">
+            <template for:each={currentFields}
+                for:item="fieldConfig">
+                <div key={fieldConfig.name}
+                    class="slds-m-bottom_medium">
+                    <lightning-input
+                        label={fieldConfig.label}
+                        value={fieldConfig.value}
+                        data-field={fieldConfig.name}
+                        onchange={handleFieldChange}>
+                    </lightning-input>
+                </div>
+            </template>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="slds-p-around_medium">
+            <template if:true={showPrevious}>
+                <lightning-button
+                    label="Previous"
+                    onclick={goToPrevious}
+                    class="slds-m-right_small">
+                </lightning-button>
+            </template>
+            <template if:true={showNext}>
+                <lightning-button
+                    variant="brand"
+                    label="Next"
+                    onclick={goToNext}>
+                </lightning-button>
+            </template>
+            <template if:true={showSubmit}>
+                <lightning-button
+                    variant="success"
+                    label="Submit"
+                    onclick={handleSubmit}>
+                </lightning-button>
+            </template>
+        </div>
+
+    </lightning-card>
+</template>
